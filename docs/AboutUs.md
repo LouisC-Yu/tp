@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Cheneil Gallardo Lee
 
 <img src="images/johndoe.png" width="200px">
 
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Louis Christopher Yu
 
 <img src="images/johndoe.png" width="200px">
 
@@ -31,26 +31,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ong Jia Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jiacheng.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[homepage](https://www.tinyurl.com/ongjiacheng)]
+[[github](http://github.com/ongjiacheng)]
+[[portfolio](team/jiacheng.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Li Ren Wong
-
-<img src="images/liren.png" width="200px">
-
-[[github](http://github.com/oofyneril)]
-[[portfolio](team/liren.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
+### Toh Yi Sheng
 
 <img src="images/johndoe.png" width="200px">
 
@@ -59,3 +51,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: UI
+
+### Wong Li Ren
+
+<img src="images/liren.png" width="200px">
+
+[[github](http://github.com/oofyneril)]
+[[portfolio](team/liren.md)]
+
+* Role: Developer
+* Responsibilities: Dev Ops + Threading
