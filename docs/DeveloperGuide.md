@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# MALAdress Developer Guide
+# AB-3 Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-#### **Use case 1: Add a supplier/customer contact with contact info**
+**Use case 1: Add a supplier/customer contact with contact info**
 
 **MSS**
 
@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. Invalid phone format - System shows error message and does not add.
 * 3a. Duplicate contact detected - System rejects add and shows duplicate error.
 
-#### **Use case 2: Tag a contact as supplier/customer and update remarks**
+**Use case 2: Tag a contact as supplier/customer and update remarks**
 System updates the contact with the new tag and updated remarks.
 
 **MSS**
@@ -337,7 +337,7 @@ System updates the contact with the new tag and updated remarks.
 * 2b. Duplicate tag in same command - System shows error message and prompts user to check the entered tag.
 * 2c. Remark too long / contains newline - System shows error message and prompts user to check the entered remark.
 
-#### **Use case 3: List all currently available suppliers (“open now”)**
+**Use case 3: List all currently available suppliers (“open now”)**
 
 **MSS**
 
