@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
+import java.time.LocalTime;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -15,6 +15,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+
 
     // Identity fields
     private final Name name;
@@ -25,8 +26,9 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+
     /**
-     * Every field must be present and not null.
+     * Constructor for Person.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -35,6 +37,11 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+
+    }
+
+    public String getPersonType() {
+        return this instanceof Supplier ? "supplier" : "customer";
     }
 
     public Name getName() {
@@ -52,6 +59,7 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -73,6 +81,7 @@ public class Person {
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
+
 
     /**
      * Returns true if both persons have the same identity and data fields.
