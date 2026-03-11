@@ -60,6 +60,11 @@ public class Person {
         return address;
     }
 
+    public String getOpeningHours() {
+        return "9:00 - 18:00";
+    }
+
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

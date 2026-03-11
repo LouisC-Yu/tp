@@ -23,4 +23,8 @@ public class Customer extends Person {
         return "Customer";
     }
 
+    public String getOpeningHours() {
+        return "9:00 - 18:00";
+    }
+
 }
