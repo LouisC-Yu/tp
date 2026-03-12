@@ -24,11 +24,6 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    private static final String MESSAGE_TAG_NOT_ALLOWED =
-            "Tags are not allowed in add. Use addcustomer/addsupplier, or use the tag command after adding.";
-
-    private static final Set<Tag> DEFAULT_TAGS = Set.of(new Tag("NONE"));
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -36,7 +31,6 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                // Keep PREFIX_TAG so 't/' is recognized instead of getting swallowed into another field.
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
@@ -44,19 +38,15 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        // Disallow tags in add
-        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
-            throw new ParseException(MESSAGE_TAG_NOT_ALLOWED);
-        }
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
-
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, DEFAULT_TAGS);
+        Person person = new Person(name, phone, email, address, tagList);
+
         return new AddCommand(person);
     }
 

@@ -54,6 +54,8 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        System.out.println("commandWord=" + commandWord);
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -80,12 +82,6 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case AddCustomerCommand.COMMAND_WORD:
-            return new AddCustomerCommandParser().parse(arguments);
-
-        case AddSupplierCommand.COMMAND_WORD:
-            return new AddSupplierCommandParser().parse(arguments);
-
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
 
@@ -94,5 +90,5 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
+

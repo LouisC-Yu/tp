@@ -8,7 +8,7 @@ import seedu.address.model.person.Person;
 
 public class AddCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "addcustomer";
+    public static final String COMMAND_WORD = "addC";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a customer contact.\n"
             + "Format: addcustomer n/NAME p/PHONE e/EMAIL a/ADDRESS\n"

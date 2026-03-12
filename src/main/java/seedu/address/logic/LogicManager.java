@@ -48,7 +48,12 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        try {
+            commandResult = command.execute(model);
+        } catch (Exception e) {
+            e.printStackTrace(); // TEMP: show the real reason
+            throw e;
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -86,3 +91,4 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 }
+

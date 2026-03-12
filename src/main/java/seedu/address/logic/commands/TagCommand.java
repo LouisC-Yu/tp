@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -13,20 +16,19 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Replaces the tags of an existing person in the address book.
- * Format: tag INDEX t/TAG [t/TAG]...
- * Example: tag 3 t/vegetable t/fruits
  */
 public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Replaces the tags of the person identified by the "
-            + "index number used in the displayed person list.\n"
-            + "Parameters: INDEX t/TAG [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 3 t/vegetable t/fruits";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Replaces the tags of the person identified "
+            + "by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_TAG + "TAG [" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 3 " + PREFIX_TAG + "vegetable " + PREFIX_TAG + "fruits";
 
-    public static final String MESSAGE_SUCCESS = "Updated tags for person: %1$s";
-    public static final String MESSAGE_INVALID_INDEX = "Invalid index: the index is out of range.";
+    public static final String MESSAGE_SUCCESS = "Updated tags for: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final Set<Tag> tags;
@@ -44,13 +46,12 @@ public class TagCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        // Replace tags (e.g., default [NONE] becomes the new tags user typed)
-        Person editedPerson = new Person(
+        Person taggedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
@@ -58,8 +59,26 @@ public class TagCommand extends Command {
                 tags
         );
 
-        model.setPerson(personToEdit, editedPerson);
+        // Same duplicate check pattern as EditCommand
+        if (!personToEdit.isSamePerson(taggedPerson) && model.hasPerson(taggedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
+        model.setPerson(personToEdit, taggedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taggedPerson)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof TagCommand)) {
+            return false;
+        }
+        TagCommand o = (TagCommand) other;
+        return index.equals(o.index) && tags.equals(o.tags);
     }
 }

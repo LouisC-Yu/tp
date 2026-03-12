@@ -8,11 +8,11 @@ import seedu.address.model.person.Person;
 
 public class AddSupplierCommand extends Command {
 
-    public static final String COMMAND_WORD = "addsupplier";
+    public static final String COMMAND_WORD = "addS";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a supplier contact.\n"
-            + "Format: addsupplier n/NAME p/PHONE e/EMAIL a/ADDRESS\n"
-            + "Example: addsupplier n/Ah Seng p/91234567 e/a@b.com a/Yishun";
+            + "Format: addS n/NAME p/PHONE e/EMAIL a/ADDRESS\n"
+            + "Example: addS n/Ah Seng p/91234567 e/a@b.com a/Yishun";
 
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
 
