@@ -52,6 +52,7 @@ public class Supplier extends Person {
         return alternativeContact;
     }
 
+    @Override
     public String getPersonType() {
         return "Supplier";
     }

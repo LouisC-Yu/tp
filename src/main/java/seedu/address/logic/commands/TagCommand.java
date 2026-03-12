@@ -45,6 +45,8 @@ public class TagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+
+
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         Person taggedPerson = new Person(

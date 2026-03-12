@@ -41,7 +41,7 @@ public class Person {
     }
 
     public String getPersonType() {
-        return this instanceof Supplier ? "supplier" : "customer";
+        return "Person";
     }
 
     public Name getName() {
