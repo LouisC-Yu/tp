@@ -49,7 +49,9 @@ public class AddSupplierCommand extends Command {
         requireNonNull(supplier);
         toAdd = supplier;
     }
-
+    /**
+     * Executes the add supplier command.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

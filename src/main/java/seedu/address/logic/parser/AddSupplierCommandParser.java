@@ -37,7 +37,8 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_TAG, PREFIX_OPENING_HOURS) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddSupplierCommand.MESSAGE_USAGE));
         }
 
         // Require at least one tag for suppliers

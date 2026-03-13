@@ -37,6 +37,9 @@ public class TagCommand extends Command {
         this.tags = tags;
     }
 
+    /**
+     * Executes the tag command.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
