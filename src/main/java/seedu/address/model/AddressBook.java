@@ -108,6 +108,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Sets {@code target} as favourite and moves it to the favourites list.
+     */
     public void setPersonAsFavourite(Person target) {
         requireNonNull(target);
 
@@ -121,6 +124,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, target.createFavouritePerson());
     }
 
+    /**
+     * Sets {@code target} as not favourite and removes it from the favourites list.
+     */
     public void unsetPersonAsFavourite(Person target) {
         requireNonNull(target);
 
