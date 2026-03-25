@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  * Sets a person identified as favourite using it's displayed index from the address book.
  */
 public class FavCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "fav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
