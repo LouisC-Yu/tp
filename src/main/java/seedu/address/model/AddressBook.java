@@ -50,6 +50,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setNextFavouriteIndex(List<Person> persons) {
+        int favouritePersonCount = countFavouritePersons(persons);
+        this.nextFavouriteIndex = Index.fromZeroBased(favouritePersonCount);
+    }
+
+    private int countFavouritePersons(List<Person> persons) {
+        return (int) persons.stream()
+                .filter(person -> person.isFavourite())
+                .count();
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -57,6 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setNextFavouriteIndex(newData.getPersonList());
     }
 
     //// person-level operations
