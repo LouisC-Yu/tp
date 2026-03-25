@@ -23,11 +23,29 @@ public class Supplier extends Person {
     private final Phone alternativeContact;
 
     /**
-     * Constructs a Supplier with the given details.
+     * Constructs a {@code Supplier} with the given details.
+     * Supplier is not favourite by default.
      */
     public Supplier(Name name, Phone phone, Email email, Address address,
                     Set<Tag> tags, String openingHours, Phone alternativeContact) throws DateTimeParseException {
         super(name, phone, email, address, tags);
+        requireAllNonNull(openingHours);
+        this.openingHoursString = openingHours;
+
+        LocalTime[] openingTimes = parseTime(openingHours);
+        this.openTime = openingTimes[0];
+        this.closeTime = openingTimes[1];
+
+        this.alternativeContact = alternativeContact;
+    }
+
+    /**
+     * Constructs a {@code Supplier} with the given details.
+     * Specifies whether supplier is favourite or not.
+     */
+    public Supplier(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+            boolean isFavourite, String openingHours, Phone alternativeContact) throws DateTimeParseException {
+        super(name, phone, email, address, tags, isFavourite);
         requireAllNonNull(openingHours);
         this.openingHoursString = openingHours;
 
@@ -64,6 +82,16 @@ public class Supplier extends Person {
 
         return otherSupplier != null
                 && otherSupplier.getName().equals(getName());
+    }
+
+    /**
+     * Returns a {@code Supplier} with identical information, but is favourite.
+     */
+    @Override
+    public Person createFavouritePerson() {
+        boolean isFavourite = true;
+        return new Supplier(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getTags(),
+                isFavourite, this.getOpeningHours(), this.alternativeContact);
     }
 
     @Override

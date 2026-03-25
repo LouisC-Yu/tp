@@ -33,6 +33,18 @@ public class Index {
         return zeroBasedIndex + 1;
     }
 
+    public void decrement() {
+        if (zeroBasedIndex <= 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        this.zeroBasedIndex -= 1;
+    }
+
+    public void increment() {
+        this.zeroBasedIndex += 1;
+    }
+
     /**
      * Creates a new {@code Index} using a zero-based index.
      */

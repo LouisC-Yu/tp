@@ -80,6 +80,12 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Sets the person as favourite and moves the given person to the favourites list.
+     * The person must exist in the address book.
+     */
+    void setPersonAsFavourite(Person target);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
