@@ -163,6 +163,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+	    this.remarks = toCopy.remarks;
             setTags(toCopy.tags);
 	    setOpeningHours(toCopy.openingHours);
         }

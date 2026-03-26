@@ -20,6 +20,7 @@ public class SupplierBuilder {
     public static final String DEFAULT_PHONE = "96466366";
     public static final String DEFAULT_EMAIL = "tak@gmail.com";
     public static final String DEFAULT_ADDRESS = "456, Tampines Ave 7, #04-222";
+    public static final String DEFAULT_REMARKS = "Supplier";
     public static final String DEFAULT_HOURS = "0000 - 2359";
     public static final String DEFAULT_ALT_PHONE = "97577477";
 
@@ -28,6 +29,7 @@ public class SupplierBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private String remarks;
     private Set<Tag> tags;
     private String openingHours;
     private Phone alternativeContact;
@@ -40,6 +42,7 @@ public class SupplierBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+	remarks = DEFAULT_REMARKS;
         tags = new HashSet<>();
         openingHours = DEFAULT_HOURS;
         alternativeContact = new Phone(DEFAULT_ALT_PHONE);
@@ -53,6 +56,7 @@ public class SupplierBuilder {
         phone = supplierToCopy.getPhone();
         email = supplierToCopy.getEmail();
         address = supplierToCopy.getAddress();
+	remarks = supplierToCopy.getRemarks();
         tags = new HashSet<>(supplierToCopy.getTags());
         openingHours = supplierToCopy.getOpeningHours();
         alternativeContact = supplierToCopy.getAlternativeContact();
@@ -115,7 +119,7 @@ public class SupplierBuilder {
     }
 
     public Supplier build() {
-        return new Supplier(name, phone, email, address, tags, openingHours, alternativeContact);
+        return new Supplier(name, phone, email, address, remarks, tags, openingHours, alternativeContact);
     }
 
 }

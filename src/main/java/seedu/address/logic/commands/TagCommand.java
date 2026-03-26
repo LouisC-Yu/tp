@@ -70,7 +70,7 @@ public class TagCommand extends Command {
                     supplier.getPhone(),
                     supplier.getEmail(),
                     supplier.getAddress(),
-		                supplier.getRemarks(),
+		    supplier.getRemarks(),
                     tags,
                     supplier.isFavourite(),
                     supplier.getOpeningHours(),

@@ -39,7 +39,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-	      this.remarks = remarks;
+	this.remarks = remarks;
         this.isFavourite = false;
     }
 
@@ -47,12 +47,13 @@ public class Person {
      * Constructs a {@code Person} with the given details.
      * Specifies whether person is favourite or not.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite) {
+    public Person(Name name, Phone phone, Email email, Address address, String remarks, Set<Tag> tags, boolean isFavourite) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+	this.remarks = remarks;
         this.tags.addAll(tags);
         this.isFavourite = isFavourite;
     }
@@ -94,7 +95,7 @@ public class Person {
      */
     public Person createFavouritePerson() {
         boolean isFavourite = true;
-        return new Person(this.name, this.phone, this.email, this.address, this.tags, isFavourite);
+        return new Person(this.name, this.phone, this.email, this.address, this.remarks, this.tags, isFavourite);
     }
 
     /**
@@ -102,7 +103,7 @@ public class Person {
      */
     public Person createNotFavouritePerson() {
         boolean isFavourite = false;
-        return new Person(this.name, this.phone, this.email, this.address, this.tags, isFavourite);
+        return new Person(this.name, this.phone, this.email, this.address, this.remarks, this.tags, isFavourite);
     }
 
     /**
