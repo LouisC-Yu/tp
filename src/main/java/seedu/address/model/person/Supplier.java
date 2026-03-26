@@ -123,9 +123,10 @@ public class Supplier extends Person {
     }
 
     /**
-     * Returns the amount of time until the closing time of the supplier.
+     * Returns time left.
+     * @return Time left as a string representation.
      */
-    public String getTimeLeft() {
+    public String timeLeft() {
         LocalTime now = LocalTime.now();
         Duration duration = Duration.between(now, closeTime);
 
