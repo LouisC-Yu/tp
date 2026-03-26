@@ -95,6 +95,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     public void setPerson(Person target, Person editedPerson) {
+        assert target.isFavourite() == editedPerson.isFavourite()
+                : "Modifying commands should not change favourite status";
+
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);

@@ -67,7 +67,8 @@ public class TagCommand extends Command {
                 personToEdit.getPhone(),
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
-                tags
+                tags,
+                personToEdit.isFavourite()
         );
 
         // Same duplicate check pattern as EditCommand
