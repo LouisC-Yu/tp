@@ -60,6 +60,14 @@
                         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
                     </HBox>
                     <HBox spacing="4" alignment="CENTER_LEFT">
+                        <ImageView fx:id="openinghoursIcon" fitWidth="16" preserveRatio="true">
+                            <image>
+                                <Image url="@/images/clock.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="openingHours" styleClass="cell_small_label" text="$openingHours" />
+                    </HBox>
+                    <HBox spacing="4" alignment="CENTER_LEFT">
                         <ImageView fx:id="remarkIcon" fitWidth="16" preserveRatio="true">
                             <image>
                                 <Image url="@/images/remark.png" />

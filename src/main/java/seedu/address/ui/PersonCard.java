@@ -38,8 +38,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label openingHours;
-    @FXML
     private Label remarks;
     @FXML
     private VBox typeBadge;
@@ -63,8 +61,6 @@ public class PersonCard extends UiPart<Region> {
         typeBadge.setVisible(false);
         typeBadge.setManaged(false);
         favouriteIcon.setVisible(person.isFavourite());
-        openingHours.setVisible(false);
-        openingHours.setManaged(false);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
