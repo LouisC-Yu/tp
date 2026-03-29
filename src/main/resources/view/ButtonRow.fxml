@@ -15,7 +15,7 @@
             <Button styleClass="button-row" text="exit" onAction="#handleCommandFull" userData="exit"/>
             <Button styleClass="button-row" text="fav" onAction="#handleCommandPartial" userData="fav "/>
             <Button styleClass="button-row" text="find" onAction="#handleCommandPartial" userData="find "/>
-            <Button styleClass="button-row" text="help" onAction="#handleCommandPartial" userData="help "/>
+            <Button styleClass="button-row" text="help" onAction="#handleCommandFull" userData="help"/>
             <Button styleClass="button-row" text="list" onAction="#handleCommandFull" userData="list"/>
             <Button styleClass="button-row" text="open" onAction="#handleCommandFull" userData="open"/>
             <Button styleClass="button-row" text="redo" onAction="#handleCommandFull" userData="redo"/>
