@@ -4,339 +4,395 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# MALAddress User Guide
+<style>
+  /* MALAddress maroon background (UserGuide page only) */
+  html, body {
+    background: #2C1010 !important;
+  }
 
-MALAddress is a **desktop app for managing contacts**, optimized for **fast CLI workflows** while still having the
-benefits of a **GUI**. It is adapted from AddressBook Level 3 (AB3) and is designed for **hawker stall owners and stall
-staff** managing **suppliers** and **regular customers**.
+  /* White “paper” content so text stays readable */
+  #content-wrapper, .page-content, .content, main, #app main {
+    background: #ffffff;
+    color: #111111;
+    border-radius: 12px;
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 24px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  }
 
-<!-- \* Table of Contents -->
+  /* Links inside content */
+  #content-wrapper a, .page-content a, .content a, main a {
+    color: #9b1c1c;
+  }
+</style>
 
+# MALAdress User Guide
+
+<!-- * Table of Contents -->
 <page-nav-print />
 
----
+--------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1. Introduction
 
-1. Ensure you have Java `17` or above installed in your computer.<br>
-   **Mac users:** Ensure you have the precise JDK version
-   prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+MALAddress is a desktop address book application for hawker stall owners and stall assistants, optimized for fast Command Line Interface (CLI) workflows while still providing the benefits of a Graphical User Interface (GUI).
+It helps users manage supplier contacts efficiently during daily operations by enabling quick keyboard-based access to contact details, checking supplier availability before contacting to prevent disturbances during off working hours, and reducing the risk of stock shortages through faster, more reliable contact management.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 2. Quick Start
+
+### Step 1: Installation
+1. Ensure Java 17 or above is installed on your computer.
 2. Download the latest `.jar` file from your team’s GitHub Releases page.
-3. Copy the file to the folder you want to use as the *home folder* for MALAddress.
-4. Open a terminal, `cd` into the folder you put the jar file in, and run:
-   `java -jar maladdress.jar`<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app may contain sample data.<br>
-   ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it.<br>
-   Some example commands you can try:
+3. Copy the `.jar` file to a folder you want to use as the home directory of MALAddress.
 
-    * `list` : Lists all contacts.
-    * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends` : Adds a contact.
-    * `adds n/Ah Seng p/91234567 e/a@b.com a/Yishun o/0900 - 1800 t/vegetable` : Adds a supplier.
-    * `find yishun vegetable` : Finds contacts matching keywords.
-    * `tag 3 t/vegetable t/fruits` : Replaces tags of the 3rd contact.
-    * `open` : Lists suppliers who are currently open (based on stored operating hours).
-    * `remark 3 r/always late` : Adds/updates remark for the 3rd contact.
-    * `fav 2` : Toggles favourite status for the 2nd contact.
-    * `undo` : Undoes the most recent change.
-    * `redo` : Redoes the most recently undone change.
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+Note:
+- Double-clicking the jar might not work on some systems. Use the terminal command below instead.
+- Do not place the jar in a write-protected folder (the app needs permission to write the data file).
 
-6. Refer to the [Features](#features) below for details of each command.
+### Step 2: Launching the Application
+1. Open a terminal.
+2. `cd` into the folder containing the jar.
+3. Run:
+   `java -jar maladdress.jar`
 
----
+A GUI similar to the following should appear:
+[paste screenshot here: main UI]
 
-## Features
+### Step 3: Understanding the Interface
+- Command Box: enter commands here.
+- Contact List Panel: shows stored contacts.
+- Result Display: shows feedback after each command.
 
-<box type="info" seamless>
+### Step 4: Try Your First Task
+1. Type: `list`
+2. Add a supplier:
+   `adds n/Ah Seng p/91234567 e/a@b.com a/Yishun o/0900 - 1800 t/vegetable`
+3. Check open suppliers:
+   `open`
 
-**Notes about the command format:**<br>
+[paste screenshot here: after adds + open]
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+--------------------------------------------------------------------------------------------------------------------
 
-### Viewing help : `help`
+## 3. Common Tasks
 
-Brings up the help window containing the link to this guide.
+### Adding a New Supplier
+Use `adds` to store supplier details (including opening hours) so the supplier can appear in `open`.
 
-Format: `help`
+### Finding a Contact Quickly
+Use `find` to search by keywords across name, phone, email, address, tags, and remarks.
 
----
+### Checking Which Suppliers Are Open
+Use `open` to filter to suppliers that are currently available (“open now”).
 
-### Adding a contact: `add`
+--------------------------------------------------------------------------------------------------------------------
 
-Adds a contact to MALAddress.
+## 4. Features
 
-Format: `add n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+### 4.1 Notes about Command Format
+- Words in UPPER_CASE are parameters you supply.
+  Example: `adds n/NAME p/PHONE ...`
+- Items in square brackets are optional.
+- Items with `...` can appear multiple times (including zero times).
+- Parameters can be in any order unless stated otherwise.
+- Extra parameters for commands that do not take parameters (e.g., `help`, `list`, `open`, `clear`) will be ignored.
+- Commands are case-sensitive by default for command words (type them as shown).
 
-Notes:
+### 4.2 Viewing Help: `help`
+Use this command to view available commands and their formats.
 
-* `t/` can be used multiple times.
+Format:
+`help`
 
-Examples:
+Expected Output:
+A help window is displayed with a list of commands and formats.
+[paste screenshot here: help window]
 
-* `add n/Wei Ming p/81234567 t/regular t/nochilli`
+--------------------------------------------------------------------------------------------------------------------
 
----
+### 4.3 Adding a Contact: `add`
+Use this command to add a general contact.
 
-### Adding a supplier: `adds`
+Format:
+`add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 
-Adds a supplier to MALAddress.
-
-Format: `adds n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] o/OPENING_HOURS [t/TAG]…`
-
-Notes:
-
-* `t/` can be used multiple times.
-* Opening hours format should be `0900 - 1800`.
-
-Examples:
-
-* `adds n/Ah Seng p/91234567 e/a@b.com a/Yishun o/0900 - 1800 t/vegetable`
-
----
-
-### Clear contacts : `clear`
-
-Deletes all stored contacts. This action is not reversible.
-
-Format: `clear`
-
----
-
-### Listing all contacts : `list`
-
-Shows a list of all contacts in MALAddress.
-
-Format: `list`
-
----
-
-### Editing a contact : `edit`
-
-Edits an existing contact in MALAddress.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-
-Notes:
-
-* Edits the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …
-* At least one optional field must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags will be replaced (i.e., tag edits are not cumulative).
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com`
-* `edit 2 t/supplier t/seafood`
-
----
-
-### Finding contacts: `find`
-
-Finds contacts whose fields contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-Search behaviour:
-
-* The search is case-insensitive.
-* Keywords can match any of: **name, phone, email, address, tags.**
-* Contacts matching at least one keyword will be returned (`OR` search).
-
-Examples:
-
-* `find supplier`
-* `find vegetables`
-* `find 9123`
-* `find yishun`
-
----
-
-### Tagging a contact: `tag`
-
-Updates tags for a contact.
-
-Format: `tag INDEX t/TAG [t/TAG]...`
-
-Notes:
-
-* Replaces the tags of the person at the specified `INDEX` with the provided tags.
-* The index refers to the index number shown in the displayed person list.
-* The index must be a positive integer 1, 2, 3, …
-
-Examples:
-
-* `tag 3 t/vegetable t/fruits`
-
----
-
-### Listing currently available suppliers : `open`
-
-Use this command to see all suppliers that are available at the current time.
-
-Format: `open`
-
-Warning: Suppliers without correctly formatted hours may not appear.
-
-Expected Output: The contact list updates to show only currently available/open suppliers.
-
-Examples: `open` shows all suppliers that are open now.
-
----
-
-### Adding/Updating a Remark: `remark`
-
-Use this command to add or update a remark for a contact (e.g., delivery notes, special instructions).
-
-Format: `remark INDEX r/REMARK`
-
-Notes:
-* `INDEX` refers to the index number shown in the displayed contact list.
-* To clear an existing remark, use an empty remark: `remark INDEX r/`
-
-Expected Output: The selected contact’s remark is updated and shown in the contact card/list.
-
-Examples:
-1. `remark 3 r/always late` adds/updates the remark for the 3rd contact.
-2. `remark 3 r/` clears the remark for the 3rd contact.
-
----
-
-### Marking a Contact as Favourite: `fav`
-
-Use this command to mark a contact as a favourite (or unmark it if it is already favourited).
-
-Format: `fav INDEX`
-
-Notes:
-* `INDEX` refers to the index number shown in the displayed contact list.
-* Running `fav` on the same index again toggles the favourite status.
-
-Expected Output: The selected contact’s favourite status is updated and reflected in the UI.
-
-Examples:
-1. `fav 2` marks the 2nd contact as a favourite.
-2. `fav 2` again removes it from favourites.
-
----
-
-### Undoing the Last Action: `undo`
-
-Use this command to undo the most recent change made to the address book (e.g., add, adds, delete, edit, tag, remark, fav).
-
-Format: `undo`
-
-Warning: If there is no previous action to undo, the command will fail.
-
-Expected Output: The address book reverts to the previous state and the contact list updates accordingly.
-
-Examples:
-1. `delete 2` followed by `undo` restores the deleted contact.
-2. `tag 1 t/fish` followed by `undo` restores the previous tags.
-
----
-
-### Redoing the Last Undone Action: `redo`
-
-Use this command to redo the most recently undone action.
-
-Format: `redo`
-
-Warning: If there is no undone action to redo, the command will fail.
-
-Note: Performing a new modifying command after `undo` clears the redo history.
-
-Expected Output: The address book reapplies the previously undone change and updates the contact list accordingly.
-
-Examples:
-1. `delete 2 → undo → redo` deletes the 2nd contact again.
-
----
-
-### Deleting a contact : `delete`
-
-Deletes the specified contact from MALAddress.
-
-Format: `delete INDEX`
-
-Notes:
-
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …
+Expected Output:
+The contact list updates with the new contact.
 
 Example:
+`add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
 
-* `delete 3`
+--------------------------------------------------------------------------------------------------------------------
 
----
+### 4.4 Adding a Supplier: `adds`
+Use this command to add a supplier contact with opening hours, so that `open` can work correctly.
 
-### Saving the data
+Format:
+`adds n/NAME p/PHONE e/EMAIL a/ADDRESS o/OPENING_HOURS t/TAG [t/TAG]...`
 
-MALAddress data is saved automatically to the hard disk after any command that changes the data. There is no need to
-save manually.
+Notes:
+- Opening hours must be in the format `HHmm - HHmm` (example: `0900 - 1800`).
+- Suppliers must have at least one tag.
 
-### Editing the data file
+Expected Output:
+The supplier appears in the contact list with opening hours and tags shown.
+[paste screenshot here: supplier added]
 
-Data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`.
-Advanced users may edit the data file directly, but invalid edits may cause MALAddress to discard data and start with an
-empty file on the next run.
+Example:
+`adds n/Ah Seng p/91234567 e/a@b.com a/Yishun o/0900 - 1800 t/vegetable`
 
-<box type="warning" seamless>
+--------------------------------------------------------------------------------------------------------------------
 
-**Caution:**
-If your changes make the data file format invalid, MALAddress may discard all data and start with an empty data file at
-the next run. Back up the file before editing it.
-</box>
+### 4.5 Listing Contacts: `list`
+Use this command to show all contacts.
 
----
+Format:
+`list`
 
-## FAQ
+Expected Output:
+All contacts are displayed in the contact list panel.
 
-**Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app on the other computer and overwrite the empty data file it creates with the data file from your
-previous MALAddress home folder.
+--------------------------------------------------------------------------------------------------------------------
 
----
+### 4.6 Finding Contacts: `find`
+Use this command to locate contacts quickly using keywords.
 
-## Known issues
+Format:
+`find KEYWORD [MORE_KEYWORDS]`
 
-1. **When using multiple screens**, the GUI may open off-screen after changing display configurations. Remedy: delete
-   the `preferences.json` file before running the app again.
-2. **If you minimize the Help Window** (if implemented as a window) and run `help` again, the help window may remain
-   minimized. Remedy: restore it manually.
+Search behaviour:
+- Case-insensitive.
+- Matches if any keyword appears in any of:
+  name, phone, email, address, tags, remarks.
 
----
+Expected Output:
+Only matching contacts are displayed.
 
-## Command summary
+Example:
+`find vegetable`
 
-| Action      | Format, Examples                                                                                                                                                     |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` |
-| **Adds**    | `adds n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] o/OPENING_HOURS [t/TAG]...`<br> e.g., `adds n/Ah Seng p/91234567 e/a@b.com a/Yishun o/0900 - 1800 t/vegetable`            |
-| **List**    | `list`                                                                                                                                                               |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find yishun vegetable`                                                                                                     |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g., `edit 2 e/jameslee@example.com a/Blk 123 Clementi Rd`                                     |
-| **Tag**     | `tag INDEX t/TAG [t/TAG]...`<br> e.g., `tag 3 t/vegetable t/fruits`                                                                                                  |
-| **Open**    | `open`                                                                                                                                                               |
-| **Remarks** | `remarks INDEX r/REMARK`<br> e.g., `remarks 3 r/always late`                                                                                                         |
-| **Fav**     | `fav INDEX`<br> e.g., `fav 2`                                                                                                                                        |
-| **Unfav**   | `unfav INDEX` <br> e.g., `unfav 2`                                                                                                                                   |
-| **Undo**    | `undo`                                                                                                                                                               |
-| **Redo**    | `redo`                                                                                                                                                               |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
-| **Clear**   | `clear`                                                                                                                                                              |
-| **Help**    | `help`                                                                                                                                                               |
-| **Exit**    | `exit`                                                                                                                                                               |
+[paste screenshot here: find results]
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.7 Editing a Contact: `edit`
+Use this command to update contact details.
+
+Format:
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [o/OPENING_HOURS]`
+
+Notes:
+- INDEX refers to the number shown in the current list.
+- Opening hours should only be used for suppliers.
+- Tags cannot be edited using `edit`. Use `tag` instead.
+
+Expected Output:
+The selected contact’s details are updated.
+
+Example:
+`edit 1 p/98765432 e/new@email.com`
+
+Example (supplier opening hours):
+`edit 1 o/1000 - 1900`
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.8 Tagging a Contact: `tag`
+Use this command to replace the tags of a contact.
+
+Format:
+`tag INDEX t/TAG [t/TAG]...`
+
+What it does:
+- Replaces the tags of the person at INDEX with the provided tags.
+
+Expected Output:
+The selected contact’s tags are updated and shown in the contact card/list.
+
+Example:
+`tag 3 t/vegetable t/fruits`
+
+Step 1:
+Run `list` (or `find ...`) so you can see the correct INDEX.
+Step 2:
+Run `tag INDEX t/...` to replace the tags.
+
+[paste screenshot here: after tagging]
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.9 Listing Open Suppliers: `open`
+Use this command to see all suppliers that are available at the current time.
+
+Format:
+`open`
+
+Warning:
+Suppliers without correctly formatted opening hours may not appear.
+
+Expected Output:
+The contact list updates to show only currently available/open suppliers.
+
+Example:
+`open`
+
+Step 1:
+Add suppliers using `adds` with valid opening hours.
+Step 2:
+Run `open` to filter suppliers that are open now.
+
+[paste screenshot here: open results]
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.10 Updating Remarks: `remarks`
+Use this command to replace the remarks of a contact.
+
+Format:
+`remarks INDEX r/REMARKS`
+
+Expected Output:
+The selected contact’s remarks are updated.
+
+Example:
+`remarks 2 r/always late`
+
+To clear remarks:
+`remarks 2 r/`
+
+[paste screenshot here: after remarks]
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.11 Favourites: `fav`
+Use this command to mark/unmark a contact as a favourite.
+
+Format:
+`fav INDEX`
+
+Expected Output:
+The contact is toggled as favourite (favourite indicator updates).
+
+Example:
+`fav 2`
+
+[paste screenshot here: favourite indicator]
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.12 Undo and Redo: `undo`, `redo`
+Use these commands to undo or redo your most recent changes.
+
+Format:
+`undo`
+`redo`
+
+What it does:
+- `undo` restores the address book to the previous state.
+- `redo` re-applies the last undone change.
+
+Expected Output:
+- The contact list updates to reflect the restored/re-applied state.
+
+Example:
+1) `delete 2`
+2) `undo` (restores the deleted contact)
+3) `redo` (deletes it again)
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.13 Deleting a Contact: `delete`
+Format:
+`delete INDEX`
+
+Deletes the person at the specified INDEX.
+The index refers to the index number shown in the displayed person list.
+The index must be a positive integer 1, 2, 3, …
+
+Expected Output:
+The selected contact is removed from the list.
+
+Example:
+1) `list` followed by `delete 2` deletes the 2nd person in the address book.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.14 Clearing All Contacts: `clear`
+Clears all contacts from the address book. This removes every contact currently stored and resets the displayed list to empty.
+
+Format:
+`clear`
+
+Expected Output:
+The contact list becomes empty.
+
+Example:
+`clear`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 5. Data Management
+
+### Saving Data
+All changes are saved automatically. No manual saving is required.
+
+### Editing the Data File
+Data is stored at:
+`[JAR file location]/data/addressbook.json`
+
+Warning:
+Invalid edits may cause data loss.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 6. FAQ
+
+Q: How do I transfer my data to another computer?
+
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MALAddress home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 7. Known Issues
+1. When using multiple screens, the GUI may open off-screen after changing monitor setup.
+   Remedy: delete `preferences.json` and restart.
+2. Mac users using fullscreen mode for secondary dialogs (e.g., Help) may encounter unexpected behaviour.
+   Remedy: exit fullscreen before opening the dialog.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 8. Command Summary
+
+Action | Format, Examples
+---|---
+Help | `help`
+Add | `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
+Add Supplier | `adds n/NAME p/PHONE e/EMAIL a/ADDRESS o/HHmm - HHmm t/TAG [t/TAG]...`
+List | `list`
+Find | `find KEYWORD [MORE_KEYWORDS]`
+Edit | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [o/HHmm - HHmm]`
+Tag | `tag INDEX t/TAG [t/TAG]...`
+Open | `open`
+Remarks | `remarks INDEX r/REMARKS`
+Favourite | `fav INDEX`
+Undo | `undo`
+Redo | `redo`
+Delete | `delete INDEX`
+Clear | `clear`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 9. Glossary
+
+Term | Definition
+---|---
+Hawker stall | A small food business operating from a stall in a hawker centre/food court, common in Singapore/Malaysia.
+Supplier | A contact that provides ingredients/services to the stall.
+Tag | A short label used to classify contacts (e.g., vegetable, seafood, friend).
+Remarks | A short note attached to a contact (e.g., “always late”, “deliver before 10am”).
+Opening hours | Supplier availability window in the format `HHmm - HHmm` (e.g., `0900 - 1800`).
+Open supplier | A supplier whose opening hours include the current time.
+Favourite | A contact marked as important (shown with a favourite indicator).
