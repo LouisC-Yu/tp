@@ -64,7 +64,7 @@ public class SupplierTest {
     public void isOpen() {
         assertTrue(ALI.isOpen(LocalTime.of(1, 0)));
         assertTrue(DENNIS.isOpen(LocalTime.of(22, 12)));
-
+        assertTrue(DENNIS.isOpen(LocalTime.of(1, 0)));
         assertFalse(BEN.isOpen(LocalTime.of(6, 59)));
         assertFalse(BEN.isOpen(LocalTime.of(23, 1)));
     }

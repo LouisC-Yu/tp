@@ -129,7 +129,7 @@ public class Supplier extends Person {
     }
 
     /**
-     * Returns the current local time.
+     * Returns true if the supplier is currently open based on the system clock.
      */
     public boolean isOpen() {
         return isOpen(LocalTime.now());
