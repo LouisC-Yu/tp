@@ -55,13 +55,9 @@ public class CommandBox extends UiPart<Region> {
      * @param command The text to be inserted.
      */
     public void insertCommand(String command) {
-        String existing = commandTextField.getText();
+        String updated = getUpdatedCommandText(commandTextField.getText(), command);
+        commandTextField.setText(updated);
 
-        if (countWords(existing) < CLEAR_IF_FEWER_THAN_LETTERS) {
-            commandTextField.setText(command); // replace if current text is command
-        } else {
-            commandTextField.appendText(command);
-        }
         commandTextField.requestFocus();
         commandTextField.positionCaret(commandTextField.getText().length());
     }
@@ -74,6 +70,21 @@ public class CommandBox extends UiPart<Region> {
         return trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
     }
     /**
+     * Returns the updated command box text after inserting {@code toInsert}.
+     * <p>
+     * If the current text has fewer than {@code CLEAR_IF_FEWER_THAN_LETTERS} words,
+     * the text is replaced; otherwise, the new text is appended.
+     */
+    static String getUpdatedCommandText(String existing, String command) {
+        String current = existing == null ? "" : existing;
+        int words = countWords(current);
+
+        if (words < CLEAR_IF_FEWER_THAN_LETTERS) {
+            return command;
+        }
+        return current + command;
+    }
+    /**
      * Runs command immediately.
      * @param command The text to be run.
      */
@@ -81,14 +92,12 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setText(command);
         handleCommandEntered();
     }
-
     /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
-
     /**
      * Sets the command box style to indicate a failed command.
      */
@@ -101,7 +110,6 @@ public class CommandBox extends UiPart<Region> {
 
         styleClass.add(ERROR_STYLE_CLASS);
     }
-
     /**
      * Represents a function that can execute commands.
      */
@@ -114,5 +122,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }
