@@ -56,12 +56,7 @@ public class CommandBox extends UiPart<Region> {
      */
     public void insertCommand(String command) {
         String existing = commandTextField.getText();
-
-        if (countWords(existing) < CLEAR_IF_FEWER_THAN_LETTERS) {
-            commandTextField.setText(command); // replace if current text is command
-        } else {
-            commandTextField.appendText(command);
-        }
+        commandTextField.setText(computeInsertedText(existing, command));
         commandTextField.requestFocus();
         commandTextField.positionCaret(commandTextField.getText().length());
     }
@@ -72,6 +67,14 @@ public class CommandBox extends UiPart<Region> {
     private static int countWords(String text) {
         String trimmed = text.trim();
         return trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
+    }
+    static String computeInsertedText(String existing, String command) {
+        String current = existing == null ? "" : existing;
+
+        if (countWords(current) < CLEAR_IF_FEWER_THAN_LETTERS) {
+            return command;
+        }
+        return current + command;
     }
     /**
      * Runs command immediately.
