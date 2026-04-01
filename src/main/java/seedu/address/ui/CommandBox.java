@@ -89,14 +89,12 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setText(command);
         handleCommandEntered();
     }
-
     /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
-
     /**
      * Sets the command box style to indicate a failed command.
      */
@@ -109,7 +107,6 @@ public class CommandBox extends UiPart<Region> {
 
         styleClass.add(ERROR_STYLE_CLASS);
     }
-
     /**
      * Represents a function that can execute commands.
      */
@@ -122,5 +119,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }
