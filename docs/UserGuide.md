@@ -9,7 +9,7 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 1. Introduction
 
@@ -38,6 +38,8 @@ Note:
 A GUI similar to the following should appear:
 ![Alt text](./images/UI_screenshot.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Step 3: Understanding the Interface
 - Command Box: enter commands here.
 - Contact List Panel: shows stored contacts.
@@ -51,6 +53,8 @@ A GUI similar to the following should appear:
    `open`
 
 ![Alt text](./images/UI_supplier.png)
+
+<div style="page-break-after: always;"></div>
 
 ![Alt text](./images/open_command.png)
 
@@ -91,7 +95,7 @@ Expected Output:
 A help window is displayed with a list of commands and formats.
 ![Alt text](./images/help_command.png)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.3 Adding a Contact: `add`
 Use this command to add a general contact.
@@ -136,7 +140,7 @@ Format:
 Expected Output:
 All contacts are displayed in the contact list panel.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.6 Finding Contacts: `find`
 Use this command to locate contacts quickly using keywords.
@@ -179,7 +183,7 @@ Example:
 Example (supplier opening hours):
 `edit 1 o/1000 - 1900`
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.8 Tagging a Contact: `tag`
 Use this command to replace the tags of a contact.
@@ -203,7 +207,7 @@ Run `tag INDEX t/...` to replace the tags.
 
 ![Alt text](./images/tag_command.png)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.9 Listing Open Suppliers: `open`
 Use this command to see all suppliers that are available at the current time.
@@ -227,7 +231,7 @@ Run `open` to filter suppliers that are open now.
 
 ![Alt text](./images/open_command.png)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.10 Updating Remarks: `remarks`
 Use this command to replace the remarks of a contact.
@@ -246,7 +250,7 @@ To clear remarks:
 
 ![Alt text](./images/remark_command.png)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.11 Favourites: `fav`, `unfav`
 Use these commands to set a contact as a favourite, where a heart shape shows up, or not.
@@ -264,7 +268,7 @@ Example:
 
 ![Alt text](./images/fav_command.png)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.12 Undo and Redo: `undo`, `redo`
 Use these commands to undo or redo your most recent changes.
@@ -329,7 +333,7 @@ Data is stored at:
 Warning:
 Invalid edits may cause data loss.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6. FAQ
 
@@ -367,7 +371,7 @@ Redo | `redo`
 Delete | `delete INDEX`
 Clear | `clear`
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 9. Glossary
 
