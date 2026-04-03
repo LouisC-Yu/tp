@@ -28,6 +28,7 @@ MALAddress continues to use the following key technologies from AB3:
 Refer to the guide _Setting up and getting started_ (SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Design
 
@@ -48,6 +49,8 @@ The bulk of the app's work is done by the following four components:
 - **Logic**: command parsing and execution
 - **Model**: in-memory data of the app
 - **Storage**: reads/writes data to disk
+
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
@@ -73,6 +76,8 @@ The UI component:
 - listens for changes to Model data so that UI updates automatically
 - displays `Person` objects from the Model
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 The Logic component is responsible for parsing user input into commands and executing them.
@@ -90,6 +95,8 @@ How the Logic component works:
 4. `LogicManager` executes the `Command`.
 5. The result is returned as a `CommandResult` and shown in ResultDisplay.
 
+<div style="page-break-after: always;"></div>
+
 Parser-related classes are shown here:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
@@ -102,6 +109,8 @@ The Model component:
 - stores user preferences
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -116,6 +125,7 @@ The Storage component:
 Shared classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Implementation
 
@@ -168,6 +178,8 @@ High-level behaviour:
 3. Model updates the contact.
 4. UI refreshes.
 
+<div style="page-break-after: always;"></div>
+
 ### Undo/redo feature
 
 MALAddress supports undo/redo for data-changing commands.
@@ -210,6 +222,8 @@ These users typically:
 
 #### Value proposition
 MALAddress helps users manage supplier contacts efficiently during daily operations by enabling quick keyboard-based access to contact details, checking supplier availability before contacting to prevent disturbances during off working hours, and reducing the risk of stock shortages through faster, more reliable contact management.
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -254,6 +268,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   2a1. System shows an error message with an example and does not add.
 - 3a. Duplicate contact
   3a1. System rejects add and shows duplicate error.
+
+<div style="page-break-after: always;"></div>
 
 #### Use case: Tag a supplier (`tag`)
 
@@ -311,6 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Undo/Redo**: Commands that revert or re-apply the most recent change(s)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Instructions for manual testing
 

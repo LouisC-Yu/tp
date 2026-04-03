@@ -39,8 +39,6 @@ Note:
 A GUI similar to the following should appear:
 ![Alt text](./images/UI_screenshot.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Step 3: Understanding the Interface
 - Command Box: enter commands here.
 - Contact List Panel: shows stored contacts.
@@ -86,6 +84,7 @@ Use `open` to filter to suppliers that are currently available (“open now”).
 - Extra parameters for commands that do not take parameters (e.g., `help`, `list`, `open`, `clear`) will be ignored.
 - Commands are case-sensitive by default for command words (type them as shown).
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ### 4.2 Viewing Help: `help`
@@ -99,7 +98,6 @@ A help window is displayed with a list of commands and formats.
 ![Alt text](./images/help_command.png)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### 4.3 Adding a Contact: `add`
 Use this command to add a general contact.
@@ -114,6 +112,7 @@ Example:
 `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### 4.4 Adding a Supplier: `adds`
 Use this command to add a supplier contact with opening hours, so that `open` can work correctly.
