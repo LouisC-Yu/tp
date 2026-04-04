@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalSuppliers.ALI;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -57,24 +57,24 @@ public class AddSupplierCommandTest {
 
     @Test
     public void equals() {
-        Supplier alice = new SupplierBuilder().withName("Alice").build();
-        Supplier bob = new SupplierBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Supplier ali = new SupplierBuilder().withName("Ali").build();
+        Supplier ben = new SupplierBuilder().withName("Ben").build();
+        AddSupplierCommand addAliCommand = new AddSupplierCommand(ali);
+        AddSupplierCommand addBenCommand = new AddSupplierCommand(ben);
 
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-        assertFalse(addAliceCommand.equals(1));
-        assertFalse(addAliceCommand.equals(null));
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertTrue(addAliCommand.equals(addAliCommand));
+        AddSupplierCommand addAliCommandCopy = new AddSupplierCommand(ali);
+        assertTrue(addAliCommand.equals(addAliCommandCopy));
+        assertFalse(addAliCommand.equals(1));
+        assertFalse(addAliCommand.equals(null));
+        assertFalse(addAliCommand.equals(addBenCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        AddSupplierCommand addSupplierCommand = new AddSupplierCommand(ALI);
+        String expected = AddSupplierCommand.class.getCanonicalName() + "{toAdd=" + ALI + "}";
+        assertEquals(expected, addSupplierCommand.toString());
     }
 
     /**
