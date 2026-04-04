@@ -25,6 +25,18 @@ public class PersonTest {
     }
 
     @Test
+    public void isPersonType() {
+        assertTrue(ALICE.getPersonType().equals("Person"));
+        assertFalse(ALICE.getPersonType().equals("Supplier"));
+    }
+
+    @Test
+    public void isSameName() {
+        assertTrue(ALICE.getName().toString().equals("Alice Pauline"));
+        assertFalse(ALICE.getName().toString().equals("Bob"));
+    }
+
+    @Test
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
