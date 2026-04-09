@@ -199,22 +199,8 @@ public class Supplier extends Person {
         LocalTime currentTime = LocalTime.now();
         Duration duration = Duration.between(currentTime, closeTime);
 
-        boolean isOvernight = closeTime.isBefore(openTime);
-
-        if (isOvernight) {
-            boolean isOpen = !currentTime.isBefore(openTime) || currentTime.isBefore(closeTime);
-
-            if (!isOpen) {
-                return Status.CLOSED.toString();
-            }
-
-            if (!currentTime.isBefore(openTime)) {
-                duration = Duration.between(currentTime, closeTime).plusDays(1);
-            }
-        } else {
-            if (duration.isNegative()) {
-                return Status.CLOSED.toString();
-            }
+        if (duration.isNegative()) {
+            return Status.CLOSED.toString();
         }
 
         long hours = duration.toHours();
