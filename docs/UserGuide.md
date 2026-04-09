@@ -14,7 +14,7 @@ pageNav: 3
 
 ## 1. Introduction
 
-MALAddress is a desktop address book application for hawker stall owners and stall assistants, optimized for fast Command Line Interface (CLI) workflows while still providing the benefits of a Graphical User Interface (GUI).
+MALAdress is a desktop address book application for hawker stall owners and stall assistants, optimized for fast Command Line Interface (CLI) workflows while still providing the benefits of a Graphical User Interface (GUI).
 It helps users manage supplier contacts efficiently during daily operations by enabling quick keyboard-based access to contact details, checking supplier availability before contacting to prevent disturbances during off working hours, and reducing the risk of stock shortages through faster, more reliable contact management.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ It helps users manage supplier contacts efficiently during daily operations by e
 ### Step 1: Installation
 1. Ensure Java 17 or above is installed on your computer.
 2. Download the latest `.jar` file from your team’s GitHub Releases page.
-3. Copy the `.jar` file to a folder you want to use as the home directory of MALAddress.
+3. Copy the `.jar` file to a folder you want to use as the home directory of MALAdress.
 
 Note:
 - Double-clicking the jar might not work on some systems. Use the terminal command below instead.
@@ -107,6 +107,9 @@ Use this command to add a general contact.
 Format:
 `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 
+Warning:
+Duplicate names will cause an error.
+
 Expected Output:
 The contact list updates with the new contact.
 
@@ -125,6 +128,9 @@ Format:
 Notes:
 - Opening hours must be in the format `HHmm - HHmm` (example: `0900 - 1800`).
 - Suppliers must have at least one tag.
+
+Warning:
+Duplicate names will cause an error.
 
 Expected Output:
 The supplier appears in the contact list with opening hours and tags shown.
@@ -202,7 +208,7 @@ What it does:
 - Replaces the tags of the person at INDEX with the provided tags.
 
 Warning:
-Existing tags before running the command will be removed.
+Tags that exist before running command will be removed.
 
 Expected Output:
 The selected contact’s tags are updated and shown in the contact card/list.
@@ -210,9 +216,9 @@ The selected contact’s tags are updated and shown in the contact card/list.
 Example:
 `tag 3 t/vegetable t/fruits`
 
-Step 1:
+- Step 1:
 Run `list` (or `find ...`) so you can see the correct INDEX.
-Step 2:
+- Step 2:
 Run `tag INDEX t/...` to replace the tags.
 
 ![Alt text](./images/tag_command.png)
@@ -235,9 +241,9 @@ The contact list updates to show only currently available/open suppliers.
 Example:
 `open`
 
-Step 1:
+- Step 1:
 Add suppliers using `adds` with valid opening hours.
-Step 2:
+- Step 2:
 Run `open` to filter suppliers that are open now.
 
 ![Alt text](./images/open_command.png)
