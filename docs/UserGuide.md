@@ -215,7 +215,7 @@ Rules:
 - `ct/` cannot be used together with `at/` or `dt/`
 - `edit` does not modify tags; use `tag` instead
 
-Expected Output:  
+Expected Output:
 The selected contact’s tags are updated and shown in the contact card/list.
 
 Examples:  

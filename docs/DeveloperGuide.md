@@ -518,23 +518,23 @@ These instructions provide a starting point for testers. Testers are expected to
 ### Tagging a contact
 
 1. Prerequisite: list contacts.
-2. Test case:  
+2. Test case:
    `tag 1 at/vegetable at/fruits`  
    Expected: both tags are added to contact 1.
 3. Test case:  
    `tag 1 dt/fruits`  
    Expected: the `fruits` tag is removed from contact 1.
-4. Test case:  
-   `tag 1 ct/`  
+4. Test case:
+   `tag 1 ct/`
    Expected: all tags are removed from contact 1.
-5. Test case:  
-   `tag 1 ct/ at/fish`  
+5. Test case:
+   `tag 1 ct/ at/fish`
    Expected: command fails because `ct/` cannot be combined with `at/`.
 
 ### Open suppliers
 
 1. Prerequisite: suppliers have valid opening hours.
-2. Test case:  
+2. Test case:
    `open`  
    Expected: The list shows only suppliers that are open now.
 
@@ -553,8 +553,8 @@ These instructions provide a starting point for testers. Testers are expected to
 ### Delete
 
 1. Prerequisite: list contacts.
-2. Test case:  
-   `delete 1`  
+2. Test case:
+   `delete 1`
    Expected: The first contact is removed and a success message is shown.
 
 ### Clear
