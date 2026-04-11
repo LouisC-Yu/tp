@@ -109,6 +109,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+
+        if (key.isFavourite()) {
+            nextFavouriteIndex.decrement();
+        }
     }
 
     /**
