@@ -481,7 +481,17 @@ These instructions provide a starting point for testers. Testers are expected to
    Expected: The first contact is removed and a success message is shown.
 
 ### Clear
+1. Test case:
+   `clear`
+   Expected: List becomes empty; success message shown.
 
-1. Test case:  
-   `clear`  
-   Expected: The list becomes empty and a success message is shown.
+### Undo and Redo
+1. Prerequisite: at least one contact exists.
+2. Test case: run `delete 1` then `undo`
+   Expected: deleted contact reappears; success message shown.
+3. Test case: run `undo` then `redo`
+   Expected: deletion is re-applied; contact removed again.
+4. Test case: run `undo` with nothing to undo
+   Expected: error message shown; data unchanged.
+
+

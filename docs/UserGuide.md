@@ -14,7 +14,7 @@ pageNav: 3
 
 ## 1. Introduction
 
-MALAddress is a desktop address book application for hawker stall owners and stall assistants, optimized for fast Command Line Interface (CLI) workflows while still providing the benefits of a Graphical User Interface (GUI).
+MALAdress is a desktop address book application for hawker stall owners and stall assistants, optimized for fast Command Line Interface (CLI) workflows while still providing the benefits of a Graphical User Interface (GUI).
 It helps users manage supplier contacts efficiently during daily operations by enabling quick keyboard-based access to contact details, checking supplier availability before contacting to prevent disturbances during off working hours, and reducing the risk of stock shortages through faster, more reliable contact management.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ It helps users manage supplier contacts efficiently during daily operations by e
 ### Step 1: Installation
 1. Ensure Java 17 or above is installed on your computer.
 2. Download the latest `.jar` file from your team’s GitHub Releases page.
-3. Copy the `.jar` file to a folder you want to use as the home directory of MALAddress.
+3. Copy the `.jar` file to a folder you want to use as the home directory of MALAdress.
 
 Note:
 - Double-clicking the jar might not work on some systems. Use the terminal command below instead.
@@ -34,7 +34,7 @@ Note:
 1. Open a terminal.
 2. `cd` into the folder containing the jar.
 3. Run:
-   `java -jar maladdress.jar`
+   `java -jar maladress.jar`
 
 A GUI similar to the following should appear:
 ![Alt text](./images/UI_screenshot.png)
@@ -85,6 +85,7 @@ Use `open` to filter to suppliers that are currently available (“open now”).
 - Commands are case-sensitive by default for command words (type them as shown).
 
 <div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### 4.2 Viewing Help: `help`
@@ -95,6 +96,7 @@ Format:
 
 Expected Output:
 A help window is displayed with a list of commands and formats.
+
 ![Alt text](./images/help_command.png)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -104,6 +106,9 @@ Use this command to add a general contact.
 
 Format:
 `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
+
+Warning:
+Duplicate names will cause an error.
 
 Expected Output:
 The contact list updates with the new contact.
@@ -123,6 +128,9 @@ Format:
 Notes:
 - Opening hours must be in the format `HHmm - HHmm` (example: `0900 - 1800`).
 - Suppliers must have at least one tag.
+
+Warning:
+Duplicate names will cause an error.
 
 Expected Output:
 The supplier appears in the contact list with opening hours and tags shown.
@@ -199,15 +207,18 @@ Format:
 What it does:
 - Replaces the tags of the person at INDEX with the provided tags.
 
+Warning:
+Tags that exist before running command will be removed.
+
 Expected Output:
 The selected contact’s tags are updated and shown in the contact card/list.
 
 Example:
 `tag 3 t/vegetable t/fruits`
 
-Step 1:
+- Step 1:
 Run `list` (or `find ...`) so you can see the correct INDEX.
-Step 2:
+- Step 2:
 Run `tag INDEX t/...` to replace the tags.
 
 ![Alt text](./images/tag_command.png)
@@ -230,9 +241,9 @@ The contact list updates to show only currently available/open suppliers.
 Example:
 `open`
 
-Step 1:
+- Step 1:
 Add suppliers using `adds` with valid opening hours.
-Step 2:
+- Step 2:
 Run `open` to filter suppliers that are open now.
 
 ![Alt text](./images/open_command.png)
@@ -252,7 +263,7 @@ The selected contact’s remarks are updated.
 Example:
 `remarks 2 r/very expensive`
 
-To clear remarks:
+Example (clearing remarks):
 `remarks 2 r/`
 
 ![Alt text](./images/remark_command.png)
