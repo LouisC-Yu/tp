@@ -147,18 +147,28 @@ The `adds` command is specifically for supplier contacts and supports opening ho
 
 ### Tag feature
 
-The `tag` command replaces the tags of a contact identified by index.
+The `tag` command modifies the tags of a contact identified by index.
+
+MALAddress supports three tag actions:
+- `at/` adds tag(s)
+- `dt/` deletes tag(s)
+- `ct/` clears all tags
 
 High-level behaviour:
-1. The parser extracts the target index and all `t/...` values.
+1. The parser extracts the target index and tag action prefixes.
 2. The command retrieves the target contact from the filtered list.
-3. A new `Person` or `Supplier` object is created with identical fields except for tags.
-4. The model updates the contact via `Model#setPerson(...)`.
-5. The filtered list refreshes and the UI updates.
+3. The command computes the updated tag set:
+    - `at/` adds new tags to the existing set
+    - `dt/` removes specified tags from the existing set
+    - `ct/` clears all tags
+4. A new `Person` or `Supplier` object is created with identical fields except for the updated tags.
+5. The model updates the contact via `Model#setPerson(...)`.
+6. The filtered list refreshes and the UI updates.
 
 Design notes:
-- Tagging is intentionally separated from `edit`.
-- This keeps `edit` focused on core details while keeping tag replacement explicit and predictable.
+- Tag modification is intentionally separated from `edit`.
+- This keeps `edit` focused on core contact details while keeping tag operations explicit.
+- `ct/` cannot be combined with `at/` or `dt/`.
 
 ### Open suppliers feature
 
@@ -344,26 +354,33 @@ For all use cases below, the system is `MALAddress`.
 
 **Use case ends.**
 
-#### Use case: Tag a contact (`tag`)
+#### Use case: Modify tags of a contact (`tag`)
 
 **Actor:** hawker stall staff
 
 **Preconditions:** Target contact exists in the current displayed list.
 
-**Guarantees:** The selected contact’s tags are replaced if the input is valid.
+**Guarantees:** The selected contact’s tags are modified if the input is valid.
 
 **Main Success Scenario**
-1. User enters `tag INDEX t/TAG [t/TAG]...`.
-2. System validates the index and tags.
-3. System replaces the contact’s tags.
+1. User enters `tag INDEX` with one or more tag actions.
+2. System validates the index and tag inputs.
+3. System updates the contact’s tags according to the action:
+    - adds tags for `at/`
+    - deletes tags for `dt/`
+    - clears all tags for `ct/`
 4. System displays a success message.
-5. System updates the list.
+5. System updates the displayed list.
 
 **Extensions**
 - 2a. Index is invalid.
     - 2a1. System shows an invalid-index error.
-- 2b. No tag value is provided.
+- 2b. No tag action is provided.
     - 2b1. System shows an invalid-format error.
+- 2c. `ct/` is used together with `at/` or `dt/`.
+    - 2c1. System shows an error indicating the combination is not allowed.
+- 2d. A tag specified with `dt/` does not exist on the contact.
+    - 2d1. System shows an error indicating that the tag cannot be deleted.
 
 **Use case ends.**
 
@@ -454,7 +471,9 @@ For all use cases below, the system is `MALAddress`.
 2. The app should be able to handle at least 1000 contacts without noticeable delay for common commands such as `add`, `adds`, `find`, `tag`, and `open`.
 3. Common tasks such as `adds`, `find`, `tag`, and `open` should be completable in a single command without requiring extra UI screens.
 4. On invalid input, the app must not modify stored data.
-5. Error messages must indicate both what went wrong and, where relevant, the expected input format.
+5. For invalid user input, the app must display an error message that identifies at least one specific cause of failure
+   (e.g. invalid index, duplicate contact, missing required prefix, or invalid time format).  
+   If the error is caused by malformed command syntax, the message must also include the expected command format or an example.
 6. Stored data should persist correctly across app restarts as long as the JSON file is not manually corrupted.
 7. The app should remain usable in a terminal-and-window workflow without requiring mouse interaction for core tasks.
 
@@ -499,14 +518,23 @@ These instructions provide a starting point for testers. Testers are expected to
 ### Tagging a contact
 
 1. Prerequisite: list contacts.
-2. Test case:  
-   `tag 1 t/vegetable t/fruits`  
-   Expected: Tags are replaced and shown in the contact card.
+2. Test case:
+   `tag 1 at/vegetable at/fruits`  
+   Expected: both tags are added to contact 1.
+3. Test case:  
+   `tag 1 dt/fruits`  
+   Expected: the `fruits` tag is removed from contact 1.
+4. Test case:
+   `tag 1 ct/`
+   Expected: all tags are removed from contact 1.
+5. Test case:
+   `tag 1 ct/ at/fish`
+   Expected: command fails because `ct/` cannot be combined with `at/`.
 
 ### Open suppliers
 
 1. Prerequisite: suppliers have valid opening hours.
-2. Test case:  
+2. Test case:
    `open`  
    Expected: The list shows only suppliers that are open now.
 
@@ -525,8 +553,8 @@ These instructions provide a starting point for testers. Testers are expected to
 ### Delete
 
 1. Prerequisite: list contacts.
-2. Test case:  
-   `delete 1`  
+2. Test case:
+   `delete 1`
    Expected: The first contact is removed and a success message is shown.
 
 ### Clear

@@ -13,5 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMARKS = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_OPENING_HOURS = new Prefix("o/");
+    public static final Prefix PREFIX_ADD_TAG = new Prefix("at/");
+    public static final Prefix PREFIX_DELETE_TAG = new Prefix("dt/");
+    public static final Prefix PREFIX_CLEAR_TAGS = new Prefix("ct/");
 
 }

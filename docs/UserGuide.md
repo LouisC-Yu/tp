@@ -199,22 +199,29 @@ Example (supplier opening hours):
 <div style="page-break-after: always;"></div>
 
 ### 4.8 Tagging a Contact: `tag`
-Use this command to replace the tags of a contact.
+Use this command to modify the tags of a contact.
 
-Format:
-`tag INDEX t/TAG [t/TAG]...`
+Format:  
+`tag INDEX [at/TAG]... [dt/TAG]... [ct/]`
 
 What it does:
-- Replaces the tags of the person at INDEX with the provided tags.
+- `at/` adds one or more tags to the contact
+- `dt/` deletes one or more existing tags from the contact
+- `ct/` clears all tags from the contact
 
-Warning:
-Tags that exist before running command will be removed.
+Rules:
+- `INDEX` refers to the number shown in the current displayed list
+- At least one of `at/`, `dt/`, or `ct/` must be provided
+- `ct/` cannot be used together with `at/` or `dt/`
+- `edit` does not modify tags; use `tag` instead
 
 Expected Output:
 The selected contact’s tags are updated and shown in the contact card/list.
 
-Example:
-`tag 3 t/vegetable t/fruits`
+Examples:  
+`tag 2 at/fish at/seafood`  
+`tag 2 dt/fish`  
+`tag 2 ct/`
 
 - Step 1:
 Run `list` (or `find ...`) so you can see the correct INDEX.
@@ -387,7 +394,7 @@ Add Supplier | `adds n/NAME p/PHONE e/EMAIL a/ADDRESS o/HHmm - HHmm t/TAG [t/TAG
 List | `list`
 Find | `find KEYWORD [MORE_KEYWORDS]`
 Edit | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [o/HHmm - HHmm]`
-Tag | `tag INDEX t/TAG [t/TAG]...`
+Tag | `tag INDEX [at/TAG]... [dt/TAG]... [ct/]`
 Open | `open`
 Remarks | `remarks INDEX r/REMARKS`
 Favourite | `fav INDEX`
