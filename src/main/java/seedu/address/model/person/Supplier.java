@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -48,8 +49,8 @@ public class Supplier extends Person {
      * @throws DateTimeParseException If {@code openingHours} has invalid values.
      */
     public Supplier(Name name, Phone phone, Email email, Address address, String remarks,
-            Set<Tag> tags, String openingHours, Phone alternativeContact)
-                    throws IllegalArgumentException, DateTimeParseException {
+                    Set<Tag> tags, String openingHours, Phone alternativeContact)
+            throws IllegalArgumentException, DateTimeParseException {
         super(name, phone, email, address, remarks, tags);
         requireAllNonNull(openingHours);
         this.openingHoursString = openingHours;
@@ -69,8 +70,8 @@ public class Supplier extends Person {
      * @throws DateTimeParseException If {@code openingHours} has invalid values.
      */
     public Supplier(Name name, Phone phone, Email email, Address address, String remarks,
-            Set<Tag> tags, boolean isFavourite, String openingHours, Phone alternativeContact)
-                    throws IllegalArgumentException, DateTimeParseException {
+                    Set<Tag> tags, boolean isFavourite, String openingHours, Phone alternativeContact)
+            throws IllegalArgumentException, DateTimeParseException {
         super(name, phone, email, address, remarks, tags, isFavourite);
         requireAllNonNull(openingHours);
         this.openingHoursString = openingHours;
@@ -82,7 +83,7 @@ public class Supplier extends Person {
         this.alternativeContact = alternativeContact;
     }
 
-    private LocalTime[] parseTime(String openingHours) throws IllegalArgumentException, DateTimeParseException {
+    private LocalTime[] parseTime(String openingHours) throws IllegalArgumentException, DateTimeException {
         if (!isValidFormat(openingHours)) {
             throw new IllegalArgumentException();
         }
@@ -90,6 +91,10 @@ public class Supplier extends Person {
 
         LocalTime openTime = LocalTime.parse(splitOpeningHours[0], INPUT_TIME_FORMAT);
         LocalTime closeTime = LocalTime.parse(splitOpeningHours[1], INPUT_TIME_FORMAT);
+
+        if (!openTime.isBefore(closeTime)) {
+            throw new DateTimeException("The Opening Hours should be before Closing hours");
+        }
 
         return new LocalTime[]{openTime, closeTime};
     }
@@ -185,10 +190,9 @@ public class Supplier extends Person {
         if (openTime.isBefore(closeTime)) {
             // Normal case
             return isAfterOpenTime && isBeforeCloseTime;
-        } else {
-            // Overnight case
-            return isAfterOpenTime || isBeforeCloseTime;
         }
+
+        return false;
     }
 
     /**
