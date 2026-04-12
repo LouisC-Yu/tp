@@ -119,7 +119,7 @@ public class EditCommand extends Command {
                     editPersonDescriptor.getPhone().orElse(supplierToEdit.getAlternativeContact());
 
             return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                    updatedRemarks, updatedTags, updatedOpeningHours, updatedAlternativeContact);
+                    updatedRemarks, updatedTags, isFavourite, updatedOpeningHours, updatedAlternativeContact);
         }
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
