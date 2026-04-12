@@ -14,7 +14,7 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, and a full word match is not required if it matches the prefix.
+     *   Ignores case, and a full word match is not required if it contains it.
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
@@ -34,7 +34,7 @@ public class StringUtil {
         String[] wordsInPreppedSentence = sentence.toLowerCase().split("\\s+");
 
         return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(s -> s.startsWith(preppedWord));
+                .anyMatch(s -> s.contains(preppedWord));
     }
 
     /**
