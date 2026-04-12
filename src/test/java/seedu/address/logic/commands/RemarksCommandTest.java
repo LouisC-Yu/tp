@@ -26,7 +26,6 @@ public class RemarksCommandTest {
 
     @Test
     public void execute_validIndex_success() throws Exception {
-        Person personToEdit = model.getFilteredPersonList().get(0);
         String newRemarks = "Updated remarks";
 
         RemarksCommand command =

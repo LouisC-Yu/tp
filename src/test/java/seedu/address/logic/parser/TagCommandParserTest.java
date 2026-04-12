@@ -71,7 +71,7 @@ public class TagCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT_OR_INDEX, TagCommand.MESSAGE_USAGE)
         );
 
-        // negative index
+        // negative
         assertParseFailure(
                 parser,
                 "-1 at/fish",
