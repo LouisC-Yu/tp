@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_VALUE;
+import static seedu.address.logic.commands.AddSupplierCommand.MESSAGE_INCORRECT_TIME_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FORMAT_OPENING_HOURS_DESC;
@@ -102,7 +102,7 @@ public class AddSupplierCommandParserTest {
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + INVALID_FORMAT_OPENING_HOURS_DESC + TAG_DESC_VEGETABLE,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_INCORRECT_TIME_FORMAT));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INCORRECT_TIME_FORMAT));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class AddSupplierCommandParserTest {
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + INVALID_MINUTE_OPENING_HOURS_DESC + TAG_DESC_VEGETABLE,
-                String.format(MESSAGE_INVALID_VALUE, AddSupplierCommand.MESSAGE_INVALID_TIME));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSupplierCommand.MESSAGE_INCORRECT_TIME_FORMAT));
     }
 
     @Test
@@ -118,6 +118,6 @@ public class AddSupplierCommandParserTest {
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + INVALID_HOUR_OPENING_HOURS_DESC + TAG_DESC_VEGETABLE,
-                String.format(MESSAGE_INVALID_VALUE, AddSupplierCommand.MESSAGE_INVALID_TIME));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INCORRECT_TIME_FORMAT));
     }
 }

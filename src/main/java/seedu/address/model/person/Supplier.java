@@ -32,7 +32,8 @@ public class Supplier extends Person {
     }
 
     private static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
-    private static final String VALID_OPENING_HOURS_FORMAT = "^([01][0-9]|2[0-3])[0-5][0-9] - ([01][0-9]|2[0-3])[0-5][0-9]";
+    private static final String VALID_OPENING_HOURS_FORMAT =
+            "^([01][0-9]|2[0-3])[0-5][0-9] - ([01][0-9]|2[0-3])[0-5][0-9]$";
     private static final int MINUTES_PER_HOUR = 60;
     private static final String TIME_LEFT_PREFIX = "%02d:%02d ";
 
@@ -184,8 +185,8 @@ public class Supplier extends Person {
      * Returns true if store is open with currentTime passed in.
      */
     public boolean isOpen(LocalTime currentTime) {
-        boolean isAfterOpenTime = currentTime.isAfter(this.openTime);
-        boolean isBeforeCloseTime = currentTime.isBefore(this.closeTime);
+        boolean isAfterOpenTime = currentTime.isAfter(openTime) || currentTime == openTime;
+        boolean isBeforeCloseTime = currentTime.isBefore(closeTime);
 
         return isAfterOpenTime && isBeforeCloseTime;
     }
