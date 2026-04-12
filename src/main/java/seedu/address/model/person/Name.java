@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should not be blank and it can only contain alphanumeric characters, spaces,"
+            "Names should not be blank or more than 49 Characters."
+                    + "And it can only contain alphanumeric characters, spaces,"
                     + "and the following special characters: "
                     + "@ / & . - ( ) ' , ; [ ] ~ ! ^ _ * # $ + | { } < > ? \\ : =";
 
@@ -19,7 +20,7 @@ public class Name {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9@/&.\\-()',;\\[\\]~!^_*#$+|{}<>?\\\\:=]"
-            + "[A-Za-z0-9 @/&.\\-()',;\\[\\]~!^_*#$+|{}<>?\\\\:=]*$";
+            + "[A-Za-z0-9 @/&.\\-()',;\\[\\]~!^_*#$+|{}<>?\\\\:=]{0,49}$";
 
     public final String fullName;
 
