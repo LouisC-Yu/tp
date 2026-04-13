@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -154,7 +154,7 @@ public class TagCommandTest {
 
         CommandException e = org.junit.jupiter.api.Assertions.assertThrows(
                 CommandException.class, () -> command.execute(model));
-        assertEquals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, e.getMessage());
+        assertEquals(Messages.MESSAGE_INDEX_NOT_IN_LIST, e.getMessage());
     }
 
     private static Model getModelWith(Person person) {

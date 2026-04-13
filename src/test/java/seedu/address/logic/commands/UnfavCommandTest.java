@@ -21,53 +21,51 @@ import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code UnfavCommand}.
  */
-public class DeleteCommandTest {
+public class UnfavCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Person personToUnfav = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnfavCommand favCommand = new UnfavCommand(INDEX_FIRST_PERSON);
+        model.setPersonAsFavourite(personToUnfav);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(UnfavCommand.MESSAGE_SUCCESS,
+                Messages.format(personToUnfav));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.saveStateForUndo();
-        expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(favCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        UnfavCommand favCommand = new UnfavCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INDEX_NOT_IN_LIST);
+        assertCommandFailure(favCommand, model, Messages.MESSAGE_INDEX_NOT_IN_LIST);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Person personToUnfav = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnfavCommand unfavCommand = new UnfavCommand(INDEX_FIRST_PERSON);
+        model.setPersonAsFavourite(personToUnfav);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(UnfavCommand.MESSAGE_SUCCESS,
+                Messages.format(personToUnfav));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.saveStateForUndo();
-        expectedModel.deletePerson(personToDelete);
 
-        assertTrue(expectedModel.getFilteredPersonList().isEmpty());
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unfavCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -78,38 +76,45 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        UnfavCommand favCommand = new UnfavCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INDEX_NOT_IN_LIST);
+        assertCommandFailure(favCommand, model, Messages.MESSAGE_INDEX_NOT_IN_LIST);
+    }
+
+    @Test
+    public void execute_personAlreadyFavourite_throwsCommandException() {
+        UnfavCommand favCommand = new UnfavCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(favCommand, model, UnfavCommand.MESSAGE_PERSON_NOT_FAVOURITE);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        UnfavCommand unfavFirstCommand = new UnfavCommand(INDEX_FIRST_PERSON);
+        UnfavCommand unfavSecondCommand = new UnfavCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(unfavFirstCommand.equals(unfavFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        UnfavCommand unfavFirstCommandCopy = new UnfavCommand(INDEX_FIRST_PERSON);
+        assertTrue(unfavFirstCommand.equals(unfavFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(unfavFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(unfavFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(unfavFirstCommand.equals(unfavSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        UnfavCommand favCommand = new UnfavCommand(targetIndex);
+        String expected = UnfavCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, favCommand.toString());
     }
 }

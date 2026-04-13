@@ -9,13 +9,10 @@
         <HBox alignment="TOP_CENTER" spacing="5">
             <Button styleClass="button-row" text="add" onAction="#handleCommandPartial" userData="add "/>
             <Button styleClass="button-row" text="adds" onAction="#handleCommandPartial" userData="adds "/>
-            <Button styleClass="button-row" text="clear" onAction="#handleCommandFull" userData="clear"/>
             <Button styleClass="button-row" text="delete" onAction="#handleCommandPartial" userData="delete "/>
             <Button styleClass="button-row" text="edit" onAction="#handleCommandPartial" userData="edit "/>
-            <Button styleClass="button-row" text="exit" onAction="#handleCommandFull" userData="exit"/>
             <Button styleClass="button-row" text="fav" onAction="#handleCommandPartial" userData="fav "/>
             <Button styleClass="button-row" text="find" onAction="#handleCommandPartial" userData="find "/>
-            <Button styleClass="button-row" text="help" onAction="#handleCommandFull" userData="help"/>
             <Button styleClass="button-row" text="list" onAction="#handleCommandFull" userData="list"/>
             <Button styleClass="button-row" text="open" onAction="#handleCommandFull" userData="open"/>
             <Button styleClass="button-row" text="redo" onAction="#handleCommandFull" userData="redo"/>

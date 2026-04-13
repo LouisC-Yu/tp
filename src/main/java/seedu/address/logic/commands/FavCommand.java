@@ -19,7 +19,9 @@ public class FavCommand extends Command {
     public static final String COMMAND_WORD = "fav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets person as favourite and moves it to the favourites list\n" + "Example: " + COMMAND_WORD + " 2";
+            + ": Sets person as favourite and moves it to the favourites list\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_SUCCESS = "Set as favourite: %1$s";
     public static final String MESSAGE_PERSON_ALREADY_FAVOURITE = "Person is already in favourites list.";
@@ -36,7 +38,7 @@ public class FavCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INDEX_NOT_IN_LIST);
         }
 
         Person personToSetAsFavourite = lastShownList.get(targetIndex.getZeroBased());

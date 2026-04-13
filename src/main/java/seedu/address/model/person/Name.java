@@ -10,13 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should not be blank or more than 49 Characters."
+                    + "And it can only contain alphanumeric characters, spaces,"
+                    + "and the following special characters: "
+                    + "@ / & . - ( ) ' , ; [ ] ~ ! ^ _ * # $ + | { } < > ? \\ : =";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9@/&.\\-()',;\\[\\]~!^_*#$+|{}<>?\\\\:=]"
+            + "[A-Za-z0-9 @/&.\\-()',;\\[\\]~!^_*#$+|{}<>?\\\\:=]{0,49}$";
 
     public final String fullName;
 

@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +32,8 @@ public class Supplier extends Person {
     }
 
     private static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
-    private static final String VALID_OPENING_HOURS_FORMAT = "^[0-9]{4} - [0-9]{4}$";
+    private static final String VALID_OPENING_HOURS_FORMAT =
+            "^([01][0-9]|2[0-3])[0-5][0-9] - ([01][0-9]|2[0-3])[0-5][0-9]$";
     private static final int MINUTES_PER_HOUR = 60;
     private static final String TIME_LEFT_PREFIX = "%02d:%02d ";
 
@@ -48,8 +50,8 @@ public class Supplier extends Person {
      * @throws DateTimeParseException If {@code openingHours} has invalid values.
      */
     public Supplier(Name name, Phone phone, Email email, Address address, String remarks,
-            Set<Tag> tags, String openingHours, Phone alternativeContact)
-                    throws IllegalArgumentException, DateTimeParseException {
+                    Set<Tag> tags, String openingHours, Phone alternativeContact)
+            throws IllegalArgumentException, DateTimeParseException {
         super(name, phone, email, address, remarks, tags);
         requireAllNonNull(openingHours);
         this.openingHoursString = openingHours;
@@ -69,8 +71,8 @@ public class Supplier extends Person {
      * @throws DateTimeParseException If {@code openingHours} has invalid values.
      */
     public Supplier(Name name, Phone phone, Email email, Address address, String remarks,
-            Set<Tag> tags, boolean isFavourite, String openingHours, Phone alternativeContact)
-                    throws IllegalArgumentException, DateTimeParseException {
+                    Set<Tag> tags, boolean isFavourite, String openingHours, Phone alternativeContact)
+            throws IllegalArgumentException, DateTimeParseException {
         super(name, phone, email, address, remarks, tags, isFavourite);
         requireAllNonNull(openingHours);
         this.openingHoursString = openingHours;
@@ -82,7 +84,7 @@ public class Supplier extends Person {
         this.alternativeContact = alternativeContact;
     }
 
-    private LocalTime[] parseTime(String openingHours) throws IllegalArgumentException, DateTimeParseException {
+    private LocalTime[] parseTime(String openingHours) throws IllegalArgumentException, DateTimeException {
         if (!isValidFormat(openingHours)) {
             throw new IllegalArgumentException();
         }
@@ -90,6 +92,10 @@ public class Supplier extends Person {
 
         LocalTime openTime = LocalTime.parse(splitOpeningHours[0], INPUT_TIME_FORMAT);
         LocalTime closeTime = LocalTime.parse(splitOpeningHours[1], INPUT_TIME_FORMAT);
+
+        if (!openTime.isBefore(closeTime)) {
+            throw new DateTimeException("The Opening Hours should be before Closing hours");
+        }
 
         return new LocalTime[]{openTime, closeTime};
     }
@@ -179,16 +185,10 @@ public class Supplier extends Person {
      * Returns true if store is open with currentTime passed in.
      */
     public boolean isOpen(LocalTime currentTime) {
-        boolean isAfterOpenTime = currentTime.isAfter(this.openTime);
-        boolean isBeforeCloseTime = currentTime.isBefore(this.closeTime);
+        boolean isAfterOpenTime = currentTime.isAfter(openTime) || currentTime == openTime;
+        boolean isBeforeCloseTime = currentTime.isBefore(closeTime);
 
-        if (openTime.isBefore(closeTime)) {
-            // Normal case
-            return isAfterOpenTime && isBeforeCloseTime;
-        } else {
-            // Overnight case
-            return isAfterOpenTime || isBeforeCloseTime;
-        }
+        return isAfterOpenTime && isBeforeCloseTime;
     }
 
     /**
@@ -197,11 +197,12 @@ public class Supplier extends Person {
      */
     public String getTimeLeft() {
         LocalTime currentTime = LocalTime.now();
-        Duration duration = Duration.between(currentTime, closeTime);
 
-        if (duration.isNegative()) {
+        if (!isOpen(currentTime)) {
             return Status.CLOSED.toString();
         }
+
+        Duration duration = Duration.between(currentTime, closeTime);
 
         long hours = duration.toHours();
         long minutes = duration.toMinutes() % MINUTES_PER_HOUR;

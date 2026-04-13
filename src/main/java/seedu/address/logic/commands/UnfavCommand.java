@@ -19,7 +19,9 @@ public class UnfavCommand extends Command {
     public static final String COMMAND_WORD = "unfav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Removes person from the favourites list\n" + "Example: " + COMMAND_WORD + " 2";
+            + ": Removes person from the favourites list\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_SUCCESS = "Removed from favourites: %1$s";
     public static final String MESSAGE_PERSON_NOT_FAVOURITE = "Person is not in favourites list.";
@@ -36,7 +38,7 @@ public class UnfavCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INDEX_NOT_IN_LIST);
         }
 
         Person personToRemoveFromFavourites = lastShownList.get(targetIndex.getZeroBased());
