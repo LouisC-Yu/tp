@@ -45,12 +45,20 @@ public class EditCommandParserTest {
     private static final String OPENING_HOURS_DESC_2 = " " + PREFIX_OPENING_HOURS + "1000 - 2000";
 
     // Wrong format (missing spaces around '-')
-    private static final String INVALID_OPENING_HOURS_DESC =
+    private static final String INVALID_FORMAT_OPENING_HOURS_DESC =
             " " + PREFIX_OPENING_HOURS + "0900-1800";
 
     // Valid format but invalid time value
-    private static final String INVALID_OPENING_HOURS_DESC_2 =
+    private static final String INVALID_VALUE_OPENING_HOURS_DESC =
             " " + PREFIX_OPENING_HOURS + "2560 - 1800";
+
+    // Valid format and values but opening time after closing time
+    private static final String INVALID_VALUE_OPENING_HOURS_DESC_2 =
+            " " + PREFIX_OPENING_HOURS + "2000 - 1800";
+
+    // Valid format and values but opening time same as closing time
+    private static final String INVALID_VALUE_OPENING_HOURS_DESC_3 =
+            " " + PREFIX_OPENING_HOURS + "1800 - 1800";
 
     private final EditCommandParser parser = new EditCommandParser();
 
@@ -95,8 +103,21 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
 
-        // invalid opening hours format/value
-        assertParseFailure(parser, "1" + INVALID_OPENING_HOURS_DESC, EditCommand.MESSAGE_INCORRECT_TIME_FORMAT);
+        // invalid opening hours format
+        assertParseFailure(parser, "1" + INVALID_FORMAT_OPENING_HOURS_DESC,
+                EditCommand.MESSAGE_INCORRECT_TIME_FORMAT);
+
+        // invalid opening hours value
+        assertParseFailure(parser, "1" + INVALID_VALUE_OPENING_HOURS_DESC,
+                EditCommand.MESSAGE_INVALID_TIME);
+
+        // opening time after closing time
+        assertParseFailure(parser, "1" + INVALID_VALUE_OPENING_HOURS_DESC_2,
+                EditCommand.MESSAGE_INVALID_TIME);
+
+        // opening time after closing time
+        assertParseFailure(parser, "1" + INVALID_VALUE_OPENING_HOURS_DESC_3,
+                EditCommand.MESSAGE_INVALID_TIME);
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);

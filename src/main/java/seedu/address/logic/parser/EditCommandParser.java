@@ -98,10 +98,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             LocalTime end = LocalTime.parse(parts[1], TIME_FORMAT);
 
             if (!start.isBefore(end)) {
-                throw new ParseException(EditCommand.MESSAGE_INVALID_VALUE);
+                throw new ParseException(EditCommand.MESSAGE_INVALID_TIME);
             }
-        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException ex) {
+        } catch (ArrayIndexOutOfBoundsException ex) {
             throw new ParseException(EditCommand.MESSAGE_INCORRECT_TIME_FORMAT);
+        } catch (DateTimeParseException ex) {
+            throw new ParseException(EditCommand.MESSAGE_INVALID_TIME);
         }
     }
 }

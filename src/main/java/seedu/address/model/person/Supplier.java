@@ -33,6 +33,8 @@ public class Supplier extends Person {
 
     private static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_OPENING_HOURS_FORMAT =
+            "^[0-9][0-9][0-9][0-9] - [0-9][0-9][0-9][0-9]$";
+    private static final String VALID_OPENING_HOURS_VALUE =
             "^([01][0-9]|2[0-3])[0-5][0-9] - ([01][0-9]|2[0-3])[0-5][0-9]$";
     private static final int MINUTES_PER_HOUR = 60;
     private static final String TIME_LEFT_PREFIX = "%02d:%02d ";
@@ -90,6 +92,10 @@ public class Supplier extends Person {
         }
         String[] splitOpeningHours = openingHours.split(" - ");
 
+        if (!isValidValue(openingHours)) {
+            throw new DateTimeException(openingHours);
+        }
+
         LocalTime openTime = LocalTime.parse(splitOpeningHours[0], INPUT_TIME_FORMAT);
         LocalTime closeTime = LocalTime.parse(splitOpeningHours[1], INPUT_TIME_FORMAT);
 
@@ -102,6 +108,10 @@ public class Supplier extends Person {
 
     private boolean isValidFormat(String openingHours) {
         return openingHours.matches(VALID_OPENING_HOURS_FORMAT);
+    }
+
+    private boolean isValidValue(String openingHours) {
+        return openingHours.matches(VALID_OPENING_HOURS_VALUE);
     }
 
     /**

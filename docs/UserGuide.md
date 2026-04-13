@@ -1,28 +1,30 @@
-\---
+
+---
 
 layout: default.md
 title: "User Guide"
 pageNav: 3
+
 ---
 
 # MALAdress User Guide
 
-<!-- \\\\\\\\\\\\\\\* Table of Contents -->
+<!-- * Table of Contents -->
 
 <page-nav-print />
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
-## 1\. Introduction
+## 1. Introduction
 
 MALAdress is a desktop address book application for hawker stall owners and stall assistants, optimized for fast Command Line Interface (CLI) workflows while still providing the benefits of a Graphical User Interface (GUI).
 It helps users manage supplier contacts efficiently during daily operations by enabling quick keyboard-based access to contact details, checking supplier availability before contacting to prevent disturbances during off working hours, and reducing the risk of stock shortages through faster, more reliable contact management.
 
-\---
+---
 
-## 2\. Quick Start
+## 2. Quick Start
 
 ### Step 1: Installation
 
@@ -45,7 +47,7 @@ Note:
 `java -jar maladress.jar`
 
 A GUI similar to the following should appear:
-!\[Alt text](./images/UI\_screenshot.png)
+![Alt text](./images/UI_screenshot.png)
 
 ### Step 3: Understanding the Interface
 
@@ -61,17 +63,15 @@ A GUI similar to the following should appear:
 3. Check open suppliers:
 `open`
 
-!\[Alt text](./images/UI\_supplier.png)
+![Alt text](./images/UI_supplier.png)
 
 <div style="page-break-after: always;"></div>
 
-!\[Alt text](./images/open\_command.png)
+![Alt text](./images/open_command.png)
 
+---
 
-
-\---
-
-## 3\. Common Tasks
+## 3. Common Tasks
 
 ### Adding a New Supplier
 
@@ -85,9 +85,9 @@ Use `find` to search by keywords across name, phone, email, address, tags, and r
 
 Use `open` to filter to suppliers that are currently available (“open now”).
 
-\---
+---
 
-## 4\. Features
+## 4. Features
 
 ### 4.1 Notes about Command Format
 - Words in UPPER_CASE are parameters you supply.
@@ -102,7 +102,7 @@ Use `open` to filter to suppliers that are currently available (“open now”).
 
 <div style="page-break-after: always;"></div>
 
-\---
+---
 
 ### 4.2 Viewing Help: `help`
 
@@ -114,16 +114,16 @@ Format:
 Expected Output:
 A help window is displayed with a list of commands and formats.
 
-!\[Alt text](./images/help\_command.png)
+![Alt text](./images/help_command.png)
 
-\---
+---
 
 ### 4.3 Adding a Contact: `add`
 
 Use this command to add a general contact.
 
 Format:
-`add n/NAME p/PHONE e/EMAIL a/ADDRESS \\\\\\\\\\\\\\\[t/TAG]...`
+`add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 
 Notes:
 - Remarks are **not** included in `adds`.
@@ -142,7 +142,7 @@ The contact list updates with the new contact.
 Example:
 `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -151,10 +151,11 @@ Example:
 Use this command to add a supplier contact with opening hours, so that `open` can work correctly.
 
 Format:
-`adds n/NAME p/PHONE e/EMAIL a/ADDRESS o/OPENING\\\\\\\\\\\\\\\_HOURS t/TAG \\\\\\\\\\\\\\\[t/TAG]...`
+`adds n/NAME p/PHONE e/EMAIL a/ADDRESS o/OPENING_HOURS t/TAG [t/TAG]...`
 
 Notes:
 - Opening hours must be in the format `HHmm - HHmm` (example: `0900 - 1800`).
+- Opening time must be before closing time, i.e. (0000 <= opening time < closing time <= 2359)
 - Suppliers must have at least one tag.
 - Remarks are **not** included in `adds`.
 - This is intentional, so that `adds` does not become too lengthy to input.
@@ -163,19 +164,18 @@ Notes:
 - Names must not be blank or exceed 49 characters.
 - Names may contain alphanumeric characters, spaces, and the following special characters: `@ / & . - ( ) ' , ; [ ] ~ ! ^ _ * # $ + | { } < > ? \ : =`
 
-
 Warning:
 Duplicate names will cause an error regardless of their case.
 
 Expected Output:
 The supplier appears in the contact list with opening hours and tags shown.
 
-!\[Alt text](./images/add\_supplier\_UI.png)
+![Alt text](./images/add_supplier_UI.png)
 
 Example:
 `adds n/Ah Seng p/91234567 e/a@b.com a/Yishun o/0900 - 2200 t/vegetable`
 
-\---
+---
 
 ### 4.5 Listing Contacts: `list`
 
@@ -187,7 +187,7 @@ Format:
 Expected Output:
 All contacts are displayed in the contact list panel.
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -196,7 +196,7 @@ All contacts are displayed in the contact list panel.
 Use this command to locate contacts quickly using keywords.
 
 Format:
-`find KEYWORD \\\\\\\\\\\\\\\[MORE\\\\\\\\\\\\\\\_KEYWORDS]`
+`find KEYWORD [MORE_KEYWORDS]`
 
 Search behaviour:
 
@@ -210,16 +210,16 @@ Only matching contacts are displayed.
 Example:
 `find vegetable`
 
-!\[Alt text](./images/find\_command.png)
+![Alt text](./images/find_command.png)
 
-\---
+---
 
 ### 4.7 Editing a Contact: `edit`
 
 Use this command to update contact details.
 
 Format:
-`edit INDEX \\\\\\\\\\\\\\\[n/NAME] \\\\\\\\\\\\\\\[p/PHONE] \\\\\\\\\\\\\\\[e/EMAIL] \\\\\\\\\\\\\\\[a/ADDRESS] \\\\\\\\\\\\\\\[o/OPENING\\\\\\\\\\\\\\\_HOURS]`
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [o/OPENING_HOURS]`
 
 Notes:
 
@@ -236,7 +236,7 @@ Example:
 Example (supplier opening hours):
 `edit 1 o/1000 - 1900`
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -245,7 +245,7 @@ Example (supplier opening hours):
 Use this command to modify the tags of a contact.
 
 Format:  
-`tag INDEX \\\\\\\\\\\\\\\[at/TAG]... \\\\\\\\\\\\\\\[dt/TAG]... \\\\\\\\\\\\\\\[ct/]`
+`tag INDEX [at/TAG]... [dt/TAG]... [ct/]`
 
 What it does:
 
@@ -276,9 +276,9 @@ Run `list` (or `find ...`) so you can see the correct INDEX.
 * Step 2:
 Run `tag INDEX t/...` to replace the tags.
 
-!\[Alt text](./images/tag\_command.png)
+![Alt text](./images/tag_command.png)
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -303,9 +303,9 @@ Add suppliers using `adds` with valid opening hours.
 * Step 2:
 Run `open` to filter suppliers that are open now.
 
-!\[Alt text](./images/open\_command.png)
+![Alt text](./images/open_command.png)
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -326,9 +326,9 @@ Example:
 Example (clearing remarks):
 `remarks 2 r/`
 
-!\[Alt text](./images/remark\_command.png)
+![Alt text](./images/remark_command.png)
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -354,9 +354,9 @@ Example:
 1. `fav 2` (set contact as a favourite)
 2. `unfav 2` (set contact as not a favourite)
 
-!\[Alt text](./images/fav\_command.png)
+![Alt text](./images/fav_command.png)
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
@@ -388,7 +388,7 @@ Example:
 2. `undo` (restores the deleted contact)
 3. `redo` (deletes it again)
 
-\---
+---
 
 ### 4.13 Deleting a Contact: `delete`
 
@@ -406,7 +406,7 @@ Example:
 
 1. `list` followed by `delete 2` deletes the 2nd person in the address book.
 
-\---
+---
 
 ### 4.14 Clearing All Contacts: `clear`
 
@@ -421,9 +421,9 @@ The contact list becomes empty.
 Example:
 `clear`
 
-\---
+---
 
-## 5\. Data Management
+## 5. Data Management
 
 ### Saving Data
 
@@ -432,43 +432,43 @@ All changes are saved automatically. No manual saving is required.
 ### Editing the Data File
 
 Data is stored at:
-`/[JAR file location]/data/maladress-data.json`
+`[JAR file location]/data/maladress-data.json`
 
 Warning:
 Invalid edits may cause data loss.
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
-## 6\. FAQ
+## 6. FAQ
 
 Q: How do I transfer my data to another computer?
 
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MALAddress home folder.
 
-\---
+---
 
-## 7\. Known Issues
+## 7. Known Issues
 
 1. When using multiple screens, the GUI may open off-screen after changing monitor setup.
 Remedy: delete `preferences.json` and restart.
 2. Mac users using fullscreen mode for secondary dialogs (e.g., Help) may encounter unexpected behaviour.
 Remedy: exit fullscreen before opening the dialog.
 
-\---
+---
 
-## 8\. Command Summary
+## 8. Command Summary
 
 |Action|Format, Examples|
 |-|-|
 |Help|`help`|
-|Add|`add n/NAME p/PHONE e/EMAIL a/ADDRESS \\\\\\\\\\\\\\\[t/TAG]...`|
-|Add Supplier|`adds n/NAME p/PHONE e/EMAIL a/ADDRESS o/HHmm - HHmm t/TAG \\\\\\\\\\\\\\\[t/TAG]...`|
+|Add|`add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`|
+|Add Supplier|`adds n/NAME p/PHONE e/EMAIL a/ADDRESS o/HHmm - HHmm t/TAG [t/TAG]...`|
 |List|`list`|
-|Find|`find KEYWORD \\\\\\\\\\\\\\\[MORE\\\\\\\\\\\\\\\_KEYWORDS]`|
-|Edit|`edit INDEX \\\\\\\\\\\\\\\[n/NAME] \\\\\\\\\\\\\\\[p/PHONE] \\\\\\\\\\\\\\\[e/EMAIL] \\\\\\\\\\\\\\\[a/ADDRESS] \\\\\\\\\\\\\\\[o/HHmm - HHmm]`|
-|Tag|`tag INDEX \\\\\\\\\\\\\\\[at/TAG]... \\\\\\\\\\\\\\\[dt/TAG]... \\\\\\\\\\\\\\\[ct/]`|
+|Find|`find KEYWORD [MORE_KEYWORDS]`|
+|Edit|`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [o/HHmm - HHmm]`|
+|Tag|`tag INDEX [at/TAG]... [dt/TAG]... [ct/]`|
 |Open|`open`|
 |Remarks|`remarks INDEX r/REMARKS`|
 |Favourite|`fav INDEX`|
@@ -478,11 +478,11 @@ Remedy: exit fullscreen before opening the dialog.
 |Delete|`delete INDEX`|
 |Clear|`clear`|
 
-\---
+---
 
 <div style="page-break-after: always;"></div>
 
-## 9\. Glossary
+## 9. Glossary
 
 |Term|Definition|
 |-|-|
