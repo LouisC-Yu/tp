@@ -126,12 +126,12 @@ Format:
 `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 
 Notes:
-- Remarks are **not** included in `adds`.
-- This is intentional, so that `adds` does not become too lengthy to input.
+- Remarks are **not** included in `add`.
+- This is intentional, so that `add` does not become too lengthy to input.
 - If you want to attach a remark, add the supplier first, then use the `remarks` command.
 - Names must not be blank or exceed 49 characters.
 - Names may contain alphanumeric characters, spaces, and the following special characters: `@ / & . - ( ) ' , ; [ ] ~ ! ^ _ * # $ + | { } < > ? \ : = `
-- Although adding `\` is allowed in names, putting prefixes between spaces like ` p/ ` can result in multiple value error
+- Although adding `/` is allowed in names, putting prefixes between spaces like ` p/ ` can result in multiple value error
 
 Warning:
 Duplicate names will cause an error regardless of their case.
@@ -160,7 +160,7 @@ Notes:
 - Remarks are **not** included in `adds`.
 - This is intentional, so that `adds` does not become too lengthy to input.
 - If you want to attach a remark, add the supplier first, then use the `remarks` command.
-- Although adding `\` is allowed in names, putting prefixes between spaces like ` p/ ` can result in multiple value error 
+- Although adding `/` is allowed in names, putting prefixes between spaces like ` p/ ` can result in multiple value error 
 - Names must not be blank or exceed 49 characters.
 - Names may contain alphanumeric characters, spaces, and the following special characters: `@ / & . - ( ) ' , ; [ ] ~ ! ^ _ * # $ + | { } < > ? \ : =`
 
@@ -445,7 +445,7 @@ Invalid edits may cause data loss.
 
 Q: How do I transfer my data to another computer?
 
-A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MALAddress home folder.
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MALAdress home folder.
 
 ---
 
